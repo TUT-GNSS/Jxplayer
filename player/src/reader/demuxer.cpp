@@ -152,7 +152,7 @@ bool DeMuxer::ReadAndSendPacket() {
             }
         }
         av_packet_unref(&packet);
-    }else if (ret == AVERROR_EOF) {
+    }else if (ret == AVERROR_EOF) { // 读到文件尾
         pause_ = true;
     }else {
         return false;

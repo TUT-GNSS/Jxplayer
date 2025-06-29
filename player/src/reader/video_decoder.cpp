@@ -199,7 +199,7 @@ void VideoDecoder::DecodeAVPacket() {
         videoFrame->width = frame->width;
         videoFrame->height = frame->height;
         videoFrame->data = std::move(buffer);
-        videoFrame->pts = frame->pts / (int)playback_speed_ ;
+        // videoFrame->pts = frame->pts / (int)playback_speed_ ;
         videoFrame->duration = frame->duration / (int)playback_speed_ ;
         videoFrame->timebase_num = time_base_.num;
         videoFrame->timebase_den = time_base_.den;

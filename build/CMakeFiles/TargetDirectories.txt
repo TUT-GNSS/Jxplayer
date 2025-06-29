@@ -1,5 +1,0 @@
-/Users/jixi/Documents/code/JxPlayer/build/CMakeFiles/JxPlayer.dir
-/Users/jixi/Documents/code/JxPlayer/build/CMakeFiles/edit_cache.dir
-/Users/jixi/Documents/code/JxPlayer/build/CMakeFiles/rebuild_cache.dir
-/Users/jixi/Documents/code/JxPlayer/build/CMakeFiles/JxPlayer_autogen_timestamp_deps.dir
-/Users/jixi/Documents/code/JxPlayer/build/CMakeFiles/JxPlayer_autogen.dir

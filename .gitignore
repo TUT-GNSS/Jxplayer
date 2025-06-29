@@ -1,5 +1,126 @@
-./build
-./cmake-build-debug
-.idea
-.clang-tidy
+# Build directories
+build/
+cmake-build-*/
+out/
+bin/
+lib/
+obj/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Compiler generated files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dylib
+*.so
+*.dll
+*.a
+*.lib
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Qt specific
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+*.qm
+*.moc
+
+# Dependencies
+third_party/
+vendor/
+external/
+
+# Package managers
+conan/
+vcpkg_installed/
+
+# Code coverage
+*.gcov
+*.gcda
+*.gcno
+coverage/
+
+# Profiling
+*.prof
+gmon.out
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Documentation build
+docs/build/
+docs/_build/
+
+# Test artifacts
+test_results/
+*.test
+test_*
+
+# Resource files (if not tracked)
+*.mp4
+*.avi
+*.mkv
+*.mp3
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# Configuration files with sensitive data
+config.ini
+settings.json
+*.key
+*.pem
+*.p12
 
