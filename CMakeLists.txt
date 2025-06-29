@@ -18,6 +18,11 @@ set(CACHE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cache")
 add_definitions(-DRESOURCE_DIR="${RESOURCE_DIR}")
 add_definitions(-DCACHE_DIR="${CACHE_DIR}")
 
+# 设置ONNX Runtime路径
+set(ONNXRUNTIME_DIR "${PROJECT_ROOT_DIR}/third_party/onnxruntime-osx-arm64-1.22.0")
+set(ONNXRUNTIME_INCLUDE_DIR "${ONNXRUNTIME_DIR}/include")
+set(ONNXRUNTIME_LIB_DIR "${ONNXRUNTIME_DIR}/lib")
+
 # 设置vcpkg工具链文件
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 
@@ -29,6 +34,7 @@ add_definitions(-DMY_MACRO)           # 定义无值的宏（等同于#define MY
 set(INCLUDE_DIRS
         ${PROJECT_ROOT_DIR}/player/include
         ${PROJECT_ROOT_DIR}/player/src
+        ${ONNXRUNTIME_INCLUDE_DIR}
         ${Qt6_INCLUDES}
         ${Qt6OpenGL_INCLUDE_DIRS}
         ${Qt6OpenGLWidgets_INCLUDE_DIRS}
@@ -79,6 +85,14 @@ add_executable(JxPlayer qt/main.cpp
         qt/ui/player_slider.h
         player/src/filter/pause_filter.cpp
         player/src/filter/pause_filter.h
+        # 添加超分辨率相关文件
+        player/src/sr/onnx_infer.cpp
+        player/src/sr/onnx_infer.h
+        player/src/sr/base_sr.h
+        player/src/sr/fsrcnn_sr.cpp
+        player/src/sr/fsrcnn_sr.h
+        player/src/sr/sr_model_factory.cpp
+        player/src/sr/sr_model_factory.h
 )
 #target_link_libraries(JxPlayer
 #  Qt::Core
@@ -100,7 +114,7 @@ pkg_check_modules(FFMPEG REQUIRED
 #target_include_directories(JxPlayer PRIVATE ${FFMPEG_INCLUDE_DIRS})
 #target_link_directories(JxPlayer PRIVATE ${FFMPEG_LIBRARY_DIRS})
 
-# 显式链接所有FFmpeg组件
+# 显式链接组件
 target_link_libraries(JxPlayer PRIVATE
         Qt6::Core
         Qt6::Gui
@@ -116,9 +130,20 @@ target_link_libraries(JxPlayer PRIVATE
         swresample
         ${PROJECT_ROOT_DIR}/third_party/InspireFace/lib/libInspireFace.dylib
         ${PROJECT_ROOT_DIR}/third_party/SoundTouch/lib/libSoundTouch.dylib
+        # 添加ONNX Runtime库
+        ${ONNXRUNTIME_LIB_DIR}/libonnxruntime.dylib
 )
-target_include_directories(JxPlayer PRIVATE /opt/homebrew/opt/ffmpeg/include)
-target_link_directories(JxPlayer PRIVATE /opt/homebrew/opt/ffmpeg/lib)
+
+# 添加头文件目录
+target_include_directories(JxPlayer PRIVATE 
+        ${INCLUDE_DIRS}
+        /opt/homebrew/opt/ffmpeg/include
+)
+
+target_link_directories(JxPlayer PRIVATE 
+        /opt/homebrew/opt/ffmpeg/lib
+        ${ONNXRUNTIME_LIB_DIR}
+)
 
 target_include_directories(JxPlayer PRIVATE /opt/homebrew/opt/glm/include)
 target_link_directories(JxPlayer PRIVATE /opt/homebrew/opt/glm/lib)
